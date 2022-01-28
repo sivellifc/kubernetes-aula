@@ -61,6 +61,9 @@ spec:
         volumeMounts:
           - mountPath: "/go/myfamily"
             name: config
+          - mountPath: "/go/pvc"
+            name: goserver-pvc
+            
         resources:
           requests:
             cpu: 100m
@@ -74,6 +77,10 @@ spec:
           - containerPort: 8080
 
       volumes:
+        - name: goserver-pvc
+          persistentVolumeClaim:
+            claimName: goserver-pvc
+
         - name: config
           configMap:
             name: configmap-family
